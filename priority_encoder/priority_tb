@@ -1,0 +1,23 @@
+module priority_en_tb;
+  reg [3:0] i;
+  wire [1:0] y;
+  wire v;
+  integer j;
+  
+  priority_en dut(i,y,v);
+  
+  initial begin
+  
+    $display("cp\t i\t y\t v");
+    $monitor("%d\t %d\t %d\t %d",$time,i,y,v);
+    
+    for(j=0;j<16;j=j+1)
+      begin
+        {i}=j;
+        #10;
+      end
+    
+    #100;$finish;
+   
+  end
+endmodule
