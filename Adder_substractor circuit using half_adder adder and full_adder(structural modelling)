@@ -1,0 +1,34 @@
+module add_sub(a,b,m,s,carry);
+	input [3:0]a,b;
+	input m;
+	output [3:0]s;
+	output carry;
+	wire c1,c2,c3,w1,w2,w3,w4;
+	
+	xor dut1(w1,b[0],m);
+	full dut2(a[0],w1,m,s[0],c1);
+	xor dut3(w2,b[1],m);
+	full dut4(a[1],w2,c1,s[1],c2);
+	xor dut5(w3,b[2],m);
+	full dut6(a[2],w3,c2,s[2],c3);
+	xor dut7(w4,b[3],m);
+	full dut8(a[3],w4,c3,s[3],carry);
+endmodule
+
+module full(a,b,cin,s,carry);
+	input a,b,cin;
+	output s,carry;
+	wire w1,w2,w3;
+
+	half ha1(a,b,w1,w2);
+	half ha2(w1,cin,s,w3);
+	or or1(carry,w2,w3);
+endmodule
+
+module half(a,b,s,carry);
+	input a,b;
+	output s,carry;
+
+	assign s=a^b;
+	assign carry=a&b;
+endmodule
