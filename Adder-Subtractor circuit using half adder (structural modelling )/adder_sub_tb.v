@@ -1,0 +1,19 @@
+module adder_sub_tb;
+  reg [3:0]a,b;
+  reg c;
+  wire [3:0]sum;
+  wire carry;
+  
+  adder_sub dut(a,b,c,sum,carry);
+  
+  initial begin
+    
+    for(i=0;i<8;i=i+1)
+      begin
+        {a,b,c}=i;
+        #10;
+      end
+
+    
+  end
+endmodule
